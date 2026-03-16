@@ -3,8 +3,6 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import PersonalFinanceTracker.Transaction;
-
 
 
 public class Main {
@@ -45,7 +43,7 @@ public class Main {
                         name = kbd.nextLine();
                         
                         
-                        Transaction budget = new Transaction("Budget", name, today.toString(), category, amount);
+                        Transactions budget = new Transactions("Budget", name, today.toString(), category, amount);
                         manager.addTransaction(budget);
 
                         break;
@@ -60,7 +58,7 @@ public class Main {
                         
                         
                         
-                        Transaction expense = new Transaction("Expense", name, today.toString(), category, amount);
+                        Transactions expense = new Transactions("Expense", name, today.toString(), category, amount);
                         manager.addTransaction(expense);
                         break;
                     case 3:

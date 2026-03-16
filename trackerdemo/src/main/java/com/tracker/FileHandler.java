@@ -1,4 +1,4 @@
-package main.java.com.tracker;
+package com.tracker;
 
 public class FileHandler 
 {

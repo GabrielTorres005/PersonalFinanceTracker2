@@ -1,4 +1,4 @@
-package main.java.com.tracker;
+package com.tracker;
 
 public class Transactions 
 {
@@ -7,7 +7,7 @@ public class Transactions
 
     /*Constructor */
 
-    public Transaction(String type, String name, String date, String category, double amount)
+    public Transactions(String type, String name, String date, String category, double amount)
     {
         this.type = type;
         this.name = name;

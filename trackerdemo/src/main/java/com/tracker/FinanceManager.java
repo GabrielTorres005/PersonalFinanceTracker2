@@ -1,4 +1,4 @@
-package main.java.com.tracker;
+package com.tracker;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -6,15 +6,12 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import PersonalFinanceTracker.Transaction;
-
-import java.io.Serializable;
 
 
 public class FinanceManager implements Serializable
 {
      /*Variables */
-    private LinkedHashMap<String, Transaction> map = new LinkedHashMap<>();
+    private LinkedHashMap<String, Transactions> map = new LinkedHashMap<>();
 
 
     /*Functions */
@@ -26,7 +23,7 @@ public class FinanceManager implements Serializable
 
     /*Choice options */
 
-    public void addTransaction(Transaction t)
+    public void addTransaction(Transactions t)
     {
         map.put(t.getType(), t);
         System.out.println(t.getType()+ ": "+ t.getName()+ " has been added to tracker.");
@@ -37,7 +34,7 @@ public class FinanceManager implements Serializable
     {
         int count = 1;
         System.out.println("-------Transactions-------\n");
-        for(Map.Entry<String,Transaction> entry: map.entrySet())
+        for(Map.Entry<String,Transactions> entry: map.entrySet())
             {
                 System.out.printf(count + ". " + entry.getValue().getType() + ": (" + entry.getValue().getCategory()+ ") \n\t" + 
                 entry.getValue().getName() + ": $%.2f\n\n",entry.getValue().getAmount());
@@ -46,16 +43,8 @@ public class FinanceManager implements Serializable
 
     }
 
-    public void save(LinkedHashMap<String,Transaction> savemap)
+    public void save()
     {
-        try(ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream("user.ser")))
-        {
-            
-        }
-        catch(IOException e)
-        {
-            System.out.println(e.getMessage());
-        }
 
     }
 
