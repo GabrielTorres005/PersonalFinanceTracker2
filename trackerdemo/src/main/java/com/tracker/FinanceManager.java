@@ -1,7 +1,4 @@
 package com.tracker;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,6 +9,7 @@ public class FinanceManager implements Serializable
 {
      /*Variables */
     private LinkedHashMap<String, Transactions> map = new LinkedHashMap<>();
+    FileHandler fh = new FileHandler();
 
 
     /*Functions */
@@ -45,9 +43,21 @@ public class FinanceManager implements Serializable
 
     public void save()
     {
-
+        fh.uploadData(map);
     }
 
+    public void viewLastSave()
+    {
+        // int count =1;
+        // LinkedHashMap<String,Transactions> lastSave = fh.loadData("save.json");
+        // for(Map.Entry<String,Transactions> entry: lastSave.entrySet())
+        //     {
+        //         System.out.printf(count + ". " + entry.getValue().getType() + ": (" + entry.getValue().getCategory()+ ") \n\t" + 
+        //         entry.getValue().getName() + ": $%.2f\n\n",entry.getValue().getAmount());
+        //         count++;
+        //     }
+        fh.displayData("save.json");
+    }
     public void summaryMenu()
     {
         

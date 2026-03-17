@@ -1,7 +1,6 @@
 package com.tracker;
 import java.util.Scanner;
 import java.time.LocalDate;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
@@ -9,10 +8,10 @@ public class Main {
     public static void main(String[] args) 
     {
          /*Variable */
-        FinanceManager fm = new FinanceManager();
         Scanner kbd = new Scanner(System.in);
         LocalDate today = LocalDate.now();
         FinanceManager manager = new FinanceManager();
+        FileHandler fh = new FileHandler();
 
         int choice;
         double amount;
@@ -24,7 +23,7 @@ public class Main {
         while(status)
             {
 
-                fm.menu();
+                manager.menu();
                 choice = kbd.nextInt();
 
                 /*Process choice */
@@ -67,7 +66,7 @@ public class Main {
                     case 4:
                         manager.save();
                     case 5:
-                        status = false;
+                        fh.displayData("save.json");
 
 
 
