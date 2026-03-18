@@ -61,15 +61,12 @@ public class Main {
                         manager.addTransaction(expense);
                         break;
                     case 3:
-                        manager.viewSummary();
+                        fh.displayData("save.json");
                         break;
                     case 4:
                         manager.save();
                     case 5:
-                        fh.displayData("save.json");
-
-
-
+                        status = false;
             }
         }
 

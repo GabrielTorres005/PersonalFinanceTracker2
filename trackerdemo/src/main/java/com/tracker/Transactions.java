@@ -15,6 +15,10 @@ public class Transactions
         this.category = category;
         this.amount = amount;
     }
+    public Transactions()
+    {
+        
+    }
 
     /*Source Methods */
 

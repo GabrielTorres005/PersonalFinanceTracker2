@@ -1,5 +1,7 @@
 package com.tracker;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,21 +16,46 @@ public class FileHandler
     ObjectMapper mapper = new ObjectMapper();
 
     /*Functions */
-    public void uploadData(LinkedHashMap <String,Transactions> data)
+    public void uploadData(LinkedList<Transactions> currentData, String filePath)
     {
-        try
-        {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("save.json"),data);
-            System.out.println("Data has been uploaded");
-        }
-        catch(IOException e)
-        {
-            System.out.println(e.getMessage());
-        }
+         LinkedList <Transactions> newData = loadData(filePath);
+        //If JSON file is empty
+        if(newData.isEmpty())
+            {
+                try
+                {
+                    mapper.writerWithDefaultPrettyPrinter().writeValue(new File("save.json"),currentData);
+                    System.out.println("Data has been uploaded");
+                }
+                catch(IOException e)
+                {
+                    System.out.println(e.getMessage());
+                }
+            }
+        else
+            {              
+                for (Transactions transactions : newData) 
+                {
+                    currentData.add(transactions);
+                }
+
+                try 
+                {
+                    File file = new File(filePath);
+                    mapper.writerWithDefaultPrettyPrinter().writeValue(file, currentData);
+                    System.out.println("Data successfully synced to " + filePath);
+                } catch (IOException e) 
+                {
+                    System.err.println("Error saving data: " + e.getMessage());
+                }
+            }
+
+        //If JSON file is not empty
+
 
     }
 
-    public LinkedHashMap<String,Transactions> loadData(String filePath)
+    public LinkedList<Transactions> loadData(String filePath)
 
     {
         try
@@ -37,44 +64,37 @@ public class FileHandler
             if(!file.exists())
                 {
 
-                    return new LinkedHashMap<>();
+                    return new LinkedList<>();
 
                 }
-            return mapper.readValue(file, new TypeReference <LinkedHashMap<String,Transactions>>(){});
+            return mapper.readValue(file, new TypeReference<LinkedList<Transactions>>(){});
+            
 
         }
         catch(IOException e)
         {
             e.printStackTrace();
-            return new LinkedHashMap<>();
+            return new LinkedList<>();
         }
 
     }
 
     public void displayData(String filePath)
     {
-       LinkedHashMap<String, Transactions> data = loadData(filePath);
+ 
+    LinkedList<Transactions> data = loadData(filePath);
 
-       if(data.isEmpty())
-        {
-            System.out.println("No data found in: " + filePath);
-
-            data.forEach((key, value) -> {
-                System.out.printf("%-15s | %-20s | $%.2f%n", 
-                key, 
-                value.getName(), 
-                value.getAmount()
-            );
-        });
+    if (data.isEmpty()) {
+        System.out.println("No data found in: " + filePath);
+    } else {
+        for (Transactions value: data) 
+            {
+                System.out.printf("%-15s | %-20s | $%.2f%n", value.getType(), value.getName(), value.getAmount());
         }
     }
-
-   
+    }  
     
-        
-
-        
-                
+    
         
 }
 

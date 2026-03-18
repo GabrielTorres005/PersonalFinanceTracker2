@@ -1,14 +1,16 @@
 package com.tracker;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 
 
 public class FinanceManager implements Serializable
 {
+    private static final String FILEPATH = "save.json";
      /*Variables */
-    private LinkedHashMap<String, Transactions> map = new LinkedHashMap<>();
+    private  static LinkedList<Transactions> map = new LinkedList<>();
     FileHandler fh = new FileHandler();
 
 
@@ -23,7 +25,7 @@ public class FinanceManager implements Serializable
 
     public void addTransaction(Transactions t)
     {
-        map.put(t.getType(), t);
+        map.add(t);
         System.out.println(t.getType()+ ": "+ t.getName()+ " has been added to tracker.");
 
     }
@@ -32,10 +34,10 @@ public class FinanceManager implements Serializable
     {
         int count = 1;
         System.out.println("-------Transactions-------\n");
-        for(Map.Entry<String,Transactions> entry: map.entrySet())
+        for(Transactions entry: map)
             {
-                System.out.printf(count + ". " + entry.getValue().getType() + ": (" + entry.getValue().getCategory()+ ") \n\t" + 
-                entry.getValue().getName() + ": $%.2f\n\n",entry.getValue().getAmount());
+                System.out.printf(count + ". " + entry.getType() + ": (" + entry.getCategory()+ ") \n\t" + 
+                entry.getName() + ": $%.2f\n\n",entry.getAmount());
                 count++;
             }
 
@@ -43,7 +45,7 @@ public class FinanceManager implements Serializable
 
     public void save()
     {
-        fh.uploadData(map);
+        fh.uploadData(map,FILEPATH);
     }
 
     public void viewLastSave()
