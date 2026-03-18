@@ -1,13 +1,13 @@
 [ {
-  "amount" : 300.0,
-  "type" : "Expense",
-  "name" : "monthly",
-  "date" : "2026-03-17",
-  "category" : "rent"
-}, {
-  "amount" : 500.0,
+  "amount" : 123455.0,
   "type" : "Budget",
-  "name" : "vacation",
-  "date" : "2026-03-17",
+  "name" : "Whenever I like to go out and eat",
+  "date" : "2026-03-18",
   "category" : "Fun"
+}, {
+  "amount" : 20000.0,
+  "type" : "Budget",
+  "name" : "Going to the zoo and eating",
+  "date" : "2026-03-18",
+  "category" : "fun"
 } ]

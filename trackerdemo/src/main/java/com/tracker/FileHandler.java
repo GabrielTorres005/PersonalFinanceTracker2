@@ -104,11 +104,19 @@ public class FileHandler
 
     if (data.isEmpty()) {
         System.out.println("No data found in: " + filePath);
-    } else {
-        for (Transactions value: data) 
-            {
-                System.out.printf((data.indexOf(value) + 1) + ".%-10s | %-20s | $%.2f%n", value.getType(), value.getName(), value.getAmount());
-        }
+    } else 
+        {
+            System.out.printf("%10s %3s %5s %6s %-5s\n","Type","|", "Name","|", "Amount");
+
+            for (Transactions value: data) 
+                {
+                    System.out.println("-------------------------------------");
+
+                    System.out.printf((data.indexOf(value) + 1) + ".%-10s | %-10s | $%.2f%n", value.getType(), value.getName(), value.getAmount());
+                    
+                }
+                System.out.println("-------------------------------------");
+                System.out.printf("%30s\n%30s\n" , "Total Budget:$ ", "Total Expenses:$ ");
     }
     }  
     
