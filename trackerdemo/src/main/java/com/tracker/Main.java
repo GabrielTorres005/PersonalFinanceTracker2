@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) 
     {
          /*Variable */
-        Scanner kbd = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         LocalDate today = LocalDate.now();
         FinanceManager manager = new FinanceManager();
         FileHandler fh = new FileHandler();
@@ -24,7 +24,7 @@ public class Main {
             {
 
                 manager.menu();
-                choice = kbd.nextInt();
+                choice = input.nextInt();
 
                 /*Process choice */
         
@@ -34,12 +34,12 @@ public class Main {
                     case 1:
                         
                         System.out.println("How much would you like to add to the budget: ");
-                        amount = kbd.nextDouble();
-                        kbd.nextLine();
+                        amount = input.nextDouble();
+                        input.nextLine();
                         System.out.println("What budget is this for (eg. Overral, Groceries, Utilities): ");
-                        category = kbd.nextLine();
+                        category = input.nextLine();
                         System.out.println("What would you like to name this budget entry: ");
-                        name = kbd.nextLine();
+                        name = input.nextLine();
                         
                         
                         Transactions budget = new Transactions("Budget", name, today.toString(), category, amount);
@@ -48,12 +48,12 @@ public class Main {
                         break;
                     case 2:
                         System.out.println("How much would you like to add to expenses: ");
-                        amount = kbd.nextDouble();
-                        kbd.nextLine();
+                        amount = input.nextDouble();
+                        input.nextLine();
                         System.out.println("What budget is this for (eg. Overral, Groceries, Utilities): ");
-                        category = kbd.nextLine();
+                        category = input.nextLine();
                         System.out.println("What would you to name this expense entry: ");
-                        name = kbd.nextLine();
+                        name = input.nextLine();
                         
                         
                         
@@ -65,12 +65,16 @@ public class Main {
                         break;
                     case 4:
                         manager.save();
+                        break;
                     case 5:
+                        manager.deleteTransaction();
+                        break;
+                    case 6:
                         status = false;
             }
         }
 
-        kbd.close();
+        input.close();
 
         /*main methods */
         

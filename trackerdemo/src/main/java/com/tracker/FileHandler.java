@@ -1,8 +1,5 @@
 package com.tracker;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.Map;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
@@ -34,15 +31,15 @@ public class FileHandler
             }
         else
             {              
-                for (Transactions transactions : newData) 
+                for (Transactions transactions : currentData) 
                 {
-                    currentData.add(transactions);
+                    newData.add(transactions);
                 }
 
                 try 
                 {
                     File file = new File(filePath);
-                    mapper.writerWithDefaultPrettyPrinter().writeValue(file, currentData);
+                    mapper.writerWithDefaultPrettyPrinter().writeValue(file, newData);
                     System.out.println("Data successfully synced to " + filePath);
                 } catch (IOException e) 
                 {
@@ -79,6 +76,27 @@ public class FileHandler
 
     }
 
+    public void removeData(int indexToRemove, String filePath)
+    {
+        LinkedList <Transactions> data = loadData(filePath);
+        if (indexToRemove >= 0 && indexToRemove < data.size()) 
+            {
+            data.remove(indexToRemove);
+            // USE SAVE, NOT UPLOAD
+            saveDeletedData(data, filePath); 
+            System.out.println("Item deleted successfully.");
+        }
+    }
+
+    public void saveDeletedData(LinkedList<Transactions> list, String filePath) {
+        try 
+        {
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), list);
+        } catch (IOException e) {
+            System.err.println("Save failed: " + e.getMessage());
+        }
+    }
+
     public void displayData(String filePath)
     {
  
@@ -89,7 +107,7 @@ public class FileHandler
     } else {
         for (Transactions value: data) 
             {
-                System.out.printf("%-15s | %-20s | $%.2f%n", value.getType(), value.getName(), value.getAmount());
+                System.out.printf((data.indexOf(value) + 1) + ".%-10s | %-20s | $%.2f%n", value.getType(), value.getName(), value.getAmount());
         }
     }
     }  
