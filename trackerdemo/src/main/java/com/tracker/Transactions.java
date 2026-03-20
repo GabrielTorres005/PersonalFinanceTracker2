@@ -2,10 +2,11 @@ package com.tracker;
 
 public class Transactions 
 {
+    //Variables
     double amount;
     String type, name, date, category;
 
-    /*Constructor */
+    /*Constructor*/
 
     public Transactions(String type, String name, String date, String category, double amount)
     {
@@ -15,14 +16,17 @@ public class Transactions
         this.category = category;
         this.amount = amount;
     }
+    //DON'T comment out just ignore trust.
     public Transactions()
     {
         
     }
 
-    /*Source Methods */
 
 
+    /*
+    Getters and Setters
+     */
     @Override
     public String toString() 
     {

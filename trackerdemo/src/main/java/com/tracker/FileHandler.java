@@ -12,16 +12,15 @@ public class FileHandler
     /*Variables */
     ObjectMapper mapper = new ObjectMapper();
 
-    /*Functions */
-    public void uploadData(LinkedList<Transactions> currentData, String filePath)
+    //Saves Data to JSON
+    public void uploadData(LinkedList<Transactions> newUpload, String filePath)
     {
-         LinkedList <Transactions> newData = loadData(filePath);
-        //If JSON file is empty
-        if(newData.isEmpty())
+         LinkedList <Transactions> previousUpload = loadData(filePath);
+        if(previousUpload.isEmpty())
             {
                 try
                 {
-                    mapper.writerWithDefaultPrettyPrinter().writeValue(new File("save.json"),currentData);
+                    mapper.writerWithDefaultPrettyPrinter().writeValue(new File("save.json"),newUpload);
                     System.out.println("Data has been uploaded");
                 }
                 catch(IOException e)
@@ -31,51 +30,43 @@ public class FileHandler
             }
         else
             {              
-                for (Transactions transactions : currentData) 
+                for (Transactions transactions : newUpload) 
                 {
-                    newData.add(transactions);
+                    previousUpload.add(transactions);
                 }
 
                 try 
                 {
                     File file = new File(filePath);
-                    mapper.writerWithDefaultPrettyPrinter().writeValue(file, newData);
+                    mapper.writerWithDefaultPrettyPrinter().writeValue(file, previousUpload);
                     System.out.println("Data successfully synced to " + filePath);
                 } catch (IOException e) 
                 {
                     System.err.println("Error saving data: " + e.getMessage());
                 }
             }
-
-        //If JSON file is not empty
-
-
     }
 
+    //Loads Data from last save
     public LinkedList<Transactions> loadData(String filePath)
-
     {
         try
         {    
             File file = new File(filePath);
             if(!file.exists())
                 {
-
                     return new LinkedList<>();
-
                 }
-            return mapper.readValue(file, new TypeReference<LinkedList<Transactions>>(){});
-            
-
+            return mapper.readValue(file, new TypeReference<LinkedList<Transactions>>(){});   
         }
         catch(IOException e)
         {
             e.printStackTrace();
             return new LinkedList<>();
         }
-
     }
 
+    //Deletes an Entry
     public void removeData(int indexToRemove, String filePath)
     {
         LinkedList <Transactions> data = loadData(filePath);
@@ -88,6 +79,7 @@ public class FileHandler
         }
     }
 
+    //Helper function for removeData, removes deleted entry from JSON file
     public void saveDeletedData(LinkedList<Transactions> list, String filePath) {
         try 
         {
@@ -97,6 +89,7 @@ public class FileHandler
         }
     }
 
+    //Displays Summarry is JSON file after last save
     public void displayData(String filePath)
     {
  

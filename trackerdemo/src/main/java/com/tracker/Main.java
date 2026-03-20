@@ -13,6 +13,7 @@ public class Main {
         FinanceManager manager = new FinanceManager();
         FileHandler fh = new FileHandler();
 
+        /*Primitive Variables */
         int choice;
         double amount;
         String name, category;
@@ -23,14 +24,15 @@ public class Main {
         while(status)
             {
 
+                //Prints menu and takes User Choice
                 manager.menu();
                 choice = input.nextInt();
 
-                /*Process choice */
-        
-
+                
+                //Processes Input
                 switch(choice)
                 {
+                    //Add Budget
                     case 1:
                         
                         System.out.println("How much would you like to add to the budget: ");
@@ -46,6 +48,7 @@ public class Main {
                         manager.addTransaction(budget);
 
                         break;
+                    //Add Expense
                     case 2:
                         System.out.println("How much would you like to add to expenses: ");
                         amount = input.nextDouble();
@@ -60,23 +63,26 @@ public class Main {
                         Transactions expense = new Transactions("Expense", name, today.toString(), category, amount);
                         manager.addTransaction(expense);
                         break;
+                    //View Summary
                     case 3:
                         fh.displayData("save.json");
                         break;
+                    //Save
                     case 4:
                         manager.save();
                         break;
+                    //Delete(Budget/Expense)
                     case 5:
                         manager.deleteTransaction();
                         break;
+                    //Exit
                     case 6:
                         status = false;
             }
         }
-
+        //Scanner close
         input.close();
 
-        /*main methods */
         
     }
 }
