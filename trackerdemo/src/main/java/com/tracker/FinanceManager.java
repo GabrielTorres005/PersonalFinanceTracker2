@@ -55,5 +55,31 @@ public class FinanceManager implements Serializable
     {
         fh.uploadData(list,FILEPATH);
     }
+
+    public double[] calculateMoneySummary(LinkedList <Transactions> list)
+    {
+        double totalbudget = 0.0;
+        double totalExpense = 0.0;
+        double totalBalance = 0.0;
+
+        
+        for(Transactions entry: list)
+            {
+                String type = entry.getType();
+                if(type.equals("Budget"))
+                {
+                    totalbudget += entry.getAmount();
+                }
+                if (type.equals("Expense"))
+                {
+                    totalExpense += entry.getAmount();
+                }
+            }
+        totalBalance = totalbudget - totalExpense;
+
+        double[] calculationsArayy = {totalbudget, totalExpense, totalBalance}; // 0 = Budget, 1 = Expense, 2 = Balance
+        
+        return calculationsArayy;
+    }
     
 }

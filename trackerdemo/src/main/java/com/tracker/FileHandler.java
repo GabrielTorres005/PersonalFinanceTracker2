@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 
+
 public class FileHandler 
 {
 
@@ -92,28 +93,85 @@ public class FileHandler
     //Displays Summarry is JSON file after last save
     public void displayData(String filePath)
     {
- 
-    LinkedList<Transactions> data = loadData(filePath);
+        LinkedList<Transactions> data = loadData(filePath);
 
-    if (data.isEmpty()) {
-        System.out.println("No data found in: " + filePath);
-    } else 
-        {
-            System.out.printf("%10s %3s %5s %6s %-5s\n","Type","|", "Name","|", "Amount");
+        if (data.isEmpty()) 
+            {
+            System.out.println("No data found in: " + filePath);
+             } 
+        else 
+            {
+                // Calculate column widths
+                int maxTypeLength = 4;      // "Type"
+                int maxNameLength = 4;      // "Name"
+                int maxCategoryLength = 8;  // "Category"
+                int maxAmountLength = 6;    // "Amount"
 
-            for (Transactions value: data) 
-                {
-                    System.out.println("-------------------------------------");
+                for (Transactions transaction : data) 
+                    {
+                        if (transaction.getType() != null) 
+                            {
+                            maxTypeLength = Math.max(maxTypeLength, transaction.getType().length());
+                        }
+                        if (transaction.getName() != null) 
+                            {
+                            maxNameLength = Math.max(maxNameLength, transaction.getName().length());
+                        }
+                        if (transaction.getCategory() != null) 
+                            {
+                            maxCategoryLength = Math.max(maxCategoryLength, transaction.getCategory().length());
+                        }
+                        if (transaction.getAmount() != 0)
+                            {
+                                maxAmountLength = Math.max(maxAmountLength, (int)String.format("%.2f", transaction.getAmount()).length());
+                            }
+                    }
 
-                    System.out.printf((data.indexOf(value) + 1) + ".%-10s | %-10s | $%.2f%n", value.getType(), value.getName(), value.getAmount());
-                    
+                // Print header
+                printHeader(maxTypeLength, maxNameLength, maxCategoryLength, maxAmountLength);
+                
+                // Print dash line
+                printDashLine(maxTypeLength, maxNameLength, maxCategoryLength, maxAmountLength);
+
+                // Print data rows
+                for (Transactions value : data) {
+                    System.out.printf("%d. | %-" + maxTypeLength + "s | %-" + maxNameLength + "s | %-" + maxCategoryLength + "s | %," + maxAmountLength + ".2f\n",
+                            (data.indexOf(value) + 1),
+                            value.getType(),
+                            value.getName(),
+                            value.getCategory(),
+                            value.getAmount());
                 }
-                System.out.println("-------------------------------------");
-                System.out.printf("%30s\n%30s\n" , "Total Budget:$ ", "Total Expenses:$ ");
-    }
-    }  
-    
-    
-        
-}
 
+                // Print final dash line
+                printDashLine(maxTypeLength, maxNameLength, maxCategoryLength, maxAmountLength);
+                
+                printData(maxTypeLength, maxNameLength, maxCategoryLength, maxAmountLength, data);
+                // System.out.printf("%30s\n%30s\n", "Total Budget:$ ", "Total Expenses:$ ");
+            }
+    }
+
+    // Helper method to print header row
+    private void printHeader(int typeWidth, int nameWidth, int categoryWidth, int amountWidth) {
+        System.out.printf("%s  | %-" + typeWidth + "s | %-" + nameWidth + "s | %-" + categoryWidth + "s | %-" + amountWidth + "s\n",
+                "#", "Type", "Name", "Category", "Amount");
+    }
+
+    // Refactored printDashLine function with dynamic widths
+    private void printDashLine(int typeWidth, int nameWidth, int categoryWidth, int amountWidth) {
+        int totalLength = 3 + 1 + typeWidth + 1 + 1 + nameWidth + 1 + 1 + categoryWidth + 1 + 1 + amountWidth + 1 + 3;
+        System.out.println("-".repeat(totalLength));
+    }
+
+    private void printData(int typeWidth, int nameWidth, int categoryWidth, int amountWidth, LinkedList<Transactions> data)
+    {
+        FinanceManager fm = new FinanceManager();
+        double[] totals = fm.calculateMoneySummary(data);
+        System.out.printf("%s    %-" + typeWidth + "s   %-" + nameWidth + "s   %s %,.2f\n"," "," ".repeat(typeWidth)," ".repeat(nameWidth), "Total Budget:$", totals[0]);
+        System.out.printf("%s    %-" + typeWidth + "s   %-" + nameWidth + "s   %s %,.2f\n"," "," ".repeat(typeWidth)," ".repeat(nameWidth), "Total Expenses:$", totals[1]);
+        System.out.printf("%s    %-" + typeWidth + "s   %-" + nameWidth + "s   %s %,.2f\n"," "," ".repeat(typeWidth)," ".repeat(nameWidth), "Total Balance:$", totals[2]);
+
+    }
+
+    // Other methods...
+}

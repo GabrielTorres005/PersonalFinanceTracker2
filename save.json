@@ -1,13 +1,25 @@
 [ {
-  "amount" : 123455.0,
-  "type" : "Budget",
-  "name" : "Whenever I like to go out and eat",
-  "date" : "2026-03-18",
-  "category" : "Fun"
-}, {
   "amount" : 20000.0,
   "type" : "Budget",
   "name" : "Going to the zoo and eating",
   "date" : "2026-03-18",
   "category" : "fun"
+}, {
+  "amount" : 3450.0,
+  "type" : "Budget",
+  "name" : "Whenever I feel like going to gamestop and buying a game",
+  "date" : "2026-03-20",
+  "category" : "Overral"
+}, {
+  "amount" : 23000.0,
+  "type" : "Expense",
+  "name" : "Morgage",
+  "date" : "2026-03-20",
+  "category" : "Rent"
+}, {
+  "amount" : 23000.0,
+  "type" : "Expense",
+  "name" : "Morgage",
+  "date" : "2026-03-20",
+  "category" : "Rent"
 } ]
