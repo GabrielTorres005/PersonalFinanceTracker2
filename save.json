@@ -16,10 +16,4 @@
   "name" : "Morgage",
   "date" : "2026-03-20",
   "category" : "Rent"
-}, {
-  "amount" : 23000.0,
-  "type" : "Expense",
-  "name" : "Morgage",
-  "date" : "2026-03-20",
-  "category" : "Rent"
 } ]

@@ -167,9 +167,9 @@ public class FileHandler
     {
         FinanceManager fm = new FinanceManager();
         double[] totals = fm.calculateMoneySummary(data);
-        System.out.printf("%s    %-" + typeWidth + "s   %-" + nameWidth + "s   %s %,.2f\n"," "," ".repeat(typeWidth)," ".repeat(nameWidth), "Total Budget:$", totals[0]);
-        System.out.printf("%s    %-" + typeWidth + "s   %-" + nameWidth + "s   %s %,.2f\n"," "," ".repeat(typeWidth)," ".repeat(nameWidth), "Total Expenses:$", totals[1]);
-        System.out.printf("%s    %-" + typeWidth + "s   %-" + nameWidth + "s   %s %,.2f\n"," "," ".repeat(typeWidth)," ".repeat(nameWidth), "Total Balance:$", totals[2]);
+        System.out.printf("%s    %-" + typeWidth + "s   %-" + nameWidth + "s   %s%,.2f\n"," "," ".repeat(typeWidth)," ".repeat(nameWidth), "Total Budget:$",totals[0]);
+        System.out.printf("%s    %-" + typeWidth + "s   %-" + nameWidth + "s   %s%,.2f\n"," "," ".repeat(typeWidth)," ".repeat(nameWidth), "Total Expenses:$",totals[1]);
+        System.out.printf("%s    %-" + typeWidth + "s   %-" + nameWidth + "s   %s%,.2f\n"," "," ".repeat(typeWidth)," ".repeat(nameWidth), "Total Balance:$",totals[2]);
 
     }
 
