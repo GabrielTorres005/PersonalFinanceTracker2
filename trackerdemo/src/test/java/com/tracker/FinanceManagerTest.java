@@ -1,16 +1,16 @@
 package com.tracker;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class FinanceManagerTest {
 
     private FinanceManager financeManager;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         financeManager = new FinanceManager();
     }
