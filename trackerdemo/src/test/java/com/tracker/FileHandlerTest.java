@@ -1,17 +1,38 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import java.util.List;
+package com.tracker;
+
+import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
+import static org.junit.Assert.*;
+
+import java.util.LinkedList;
+
 
 public class FileHandlerTest {
 
-    private FileHandler fileHandler = new FileHandler();
 
+
+    private Transactions budgetTransaction;
+    private Transactions expenseTransaction;
+    private FileHandler fileHandler;
+    LinkedList<Transactions> list;
+
+
+    @Before
+    public void setUp() {
+        budgetTransaction = new Transactions("Budget", "Monthly Income", "2026-03-23", "Salary", 5000.00);
+        expenseTransaction = new Transactions("Expense", "Grocery Shopping", "2026-03-23", "Food", 150.00);
+       list = new LinkedList<>();
+        list.add(budgetTransaction);
+        list.add(expenseTransaction);
+         fileHandler = new FileHandler();
+
+    }
     @Test
     public void testUploadData() {
         // Setup
-        String testData = "Sample data";
         // Execution
-        boolean result = fileHandler.uploadData(testData);
+        boolean result = fileHandler.uploadData(list,"saveTest");
         // Verification
         assertTrue(result);
         // Additional assertions can be added to verify the data storage behavior
