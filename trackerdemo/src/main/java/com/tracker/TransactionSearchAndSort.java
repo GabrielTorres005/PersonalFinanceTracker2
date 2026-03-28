@@ -144,7 +144,7 @@ public class TransactionSearchAndSort
             }
     
             List<Transactions> list = new ArrayList<>(transactions);
-            quickSortHelper(list, 0, list.size() - 1, criteria, ascending);
+             quickSortHelper(list, 0, list.size() - 1, criteria, ascending);
             return new LinkedList<>(list);
         }
     
