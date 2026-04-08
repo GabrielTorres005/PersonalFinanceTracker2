@@ -86,41 +86,43 @@ public class FinanceManager implements Serializable
     }
     
 
-    private void displayAdvanceOptions()
+    public void displayAdvanceOptions(String advanceChoice)
     {
-        System.out.println("Advance options?(Y/N): ");
-        String choice = input.nextLine();
+        int [] choicesArray = new int[3];
         /*
             Idexes of choices array
             0. Search or sort choice
             1.SortChoice
         */
-        String [] choicesArray = new String[3];
-
-        if(choice == "y")
+        if(advanceChoice.equals("y"))
             {
                 System.out.println("1. Sort");
                 System.out.println("2. Search");
-                choicesArray[0] = input.nextLine();
+                choicesArray[0] = input.nextInt();
             }
         else
         {
-
+            //display for when they don't want to use advance options
         }
 
         switch (choicesArray[0]) 
         {
-            case "y":
+            case 1:
                 {
+                    //Sorting
                     System.out.println("\tSort by");
                     System.out.println("1. Name\n2. Category\n3. Date\n4. Amount");
-                    choicesArray[1] = input.nextLine();
+                    choicesArray[1] = input.nextInt();
 
-                    switch(Integer.parseInt(choicesArray[1]))
+                    switch(choicesArray[1])
                     {
+                        //Display by name
                         case 1:
                             {
-                                sorter.mergeSort(list,sorter.Sort)
+                                sorter.mergeSort(list, SortCriteria.BY_NAME, false);
+                                save();
+                                fh.displayData("save.json");
+
                             }
                             
                     }

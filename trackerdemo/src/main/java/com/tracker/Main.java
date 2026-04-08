@@ -66,6 +66,10 @@ public class Main {
                     //View Summary
                     case 3:
                         fh.displayData("save.json");
+                        input.nextLine();
+                        System.out.println("Advance options?(Y/N): ");
+                        String advanceInput = input.nextLine();
+                        manager.displayAdvanceOptions(advanceInput);
                         break;
                     //Save
                     case 4:
@@ -74,7 +78,9 @@ public class Main {
                     //Delete(Budget/Expense)
                     case 5:
                         manager.deleteTransaction();
+
                         break;
+
                     //Exit
                     case 6:
                         status = false;
