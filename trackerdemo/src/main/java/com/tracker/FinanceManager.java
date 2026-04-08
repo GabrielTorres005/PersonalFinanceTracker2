@@ -3,14 +3,17 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import com.tracker.TransactionSearchAndSort.SortCriteria;
+
 
 public class FinanceManager implements Serializable
 {
     //Variables
     private static final String FILEPATH = "save.json";
-    private  static LinkedList<Transactions> list = new LinkedList<>();
+    private static  LinkedList<Transactions> list = new LinkedList<>();
     FileHandler fh = new FileHandler();
     Scanner input = new Scanner(System.in);
+    TransactionSearchAndSort sorter;
 
     //Prints Menu
     public void menu()
@@ -82,4 +85,51 @@ public class FinanceManager implements Serializable
         return calculationsArayy;
     }
     
+
+    private void displayAdvanceOptions()
+    {
+        System.out.println("Advance options?(Y/N): ");
+        String choice = input.nextLine();
+        /*
+            Idexes of choices array
+            0. Search or sort choice
+            1.SortChoice
+        */
+        String [] choicesArray = new String[3];
+
+        if(choice == "y")
+            {
+                System.out.println("1. Sort");
+                System.out.println("2. Search");
+                choicesArray[0] = input.nextLine();
+            }
+        else
+        {
+
+        }
+
+        switch (choicesArray[0]) 
+        {
+            case "y":
+                {
+                    System.out.println("\tSort by");
+                    System.out.println("1. Name\n2. Category\n3. Date\n4. Amount");
+                    choicesArray[1] = input.nextLine();
+
+                    switch(Integer.parseInt(choicesArray[1]))
+                    {
+                        case 1:
+                            {
+                                sorter.mergeSort(list,sorter.Sort)
+                            }
+                            
+                    }
+
+                }
+           
+        }
+     
+    }
+    
 }
+

@@ -12,7 +12,9 @@ public class FileHandler
 
     /*Variables */
     ObjectMapper mapper = new ObjectMapper();
+    TransactionSearchAndSort sorter = new TransactionSearchAndSort();
 
+    
     //Saves Data to JSON
     public void uploadData(LinkedList<Transactions> newUpload, String filePath)
     {
@@ -173,5 +175,9 @@ public class FileHandler
 
     }
 
+  
+
     // Other methods...
+
+
 }
