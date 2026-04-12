@@ -15,7 +15,11 @@ public class FileHandler
     TransactionSearchAndSort sorter = new TransactionSearchAndSort();
 
     
-    //Saves Data to JSON
+    /**
+     * Uploads data from current Transaction arraylist to JSON file
+     * @param newUpload Transaction arraylist
+     * @param filePath Filepath to JSON file
+     */
     public void uploadData(LinkedList<Transactions> newUpload, String filePath)
     {
          LinkedList <Transactions> previousUpload = loadData(filePath);
@@ -50,7 +54,11 @@ public class FileHandler
             }
     }
 
-    //Loads Data from last save
+    /**
+     * Loads existing data from JSON file to current session
+     * @param filePath Filepath to JSON file
+     * @return Transaction arraylist saved in JSON file
+     */
     public LinkedList<Transactions> loadData(String filePath)
     {
         try
@@ -69,7 +77,11 @@ public class FileHandler
         }
     }
 
-    //Deletes an Entry
+    /**
+     * Deletes transaction from JSON file
+     * @param indexToRemove Index at which the value to delete is at
+     * @param filePath Filepath to JSON file
+     */
     public void removeData(int indexToRemove, String filePath)
     {
         LinkedList <Transactions> data = loadData(filePath);
@@ -82,7 +94,12 @@ public class FileHandler
         }
     }
 
-    //Helper function for removeData, removes deleted entry from JSON file
+    /**
+     * Helper function to removeData, it saves the new version of Transaction arraylist
+     * during current session
+     * @param list Transaction arraylist
+     * @param filePath Filepath to JSON file
+     */
     public void saveDeletedData(LinkedList<Transactions> list, String filePath) {
         try 
         {
@@ -92,7 +109,10 @@ public class FileHandler
         }
     }
 
-    //Displays Summarry is JSON file after last save
+    /**
+     * Displays menu for view Summary function
+     * @param filePath Filepath to JSON file
+     */
     public void displayData(String filePath)
     {
         LinkedList<Transactions> data = loadData(filePath);
@@ -149,22 +169,40 @@ public class FileHandler
                 printDashLine(maxTypeLength, maxNameLength, maxCategoryLength, maxAmountLength);
                 
                 printData(maxTypeLength, maxNameLength, maxCategoryLength, maxAmountLength, data);
-                // System.out.printf("%30s\n%30s\n", "Total Budget:$ ", "Total Expenses:$ ");
             }
     }
 
-    // Helper method to print header row
+    /**
+     * Helper function to displayData, it prints the header
+     * @param typeWidth Widthpace for type of transaction
+     * @param nameWidth Widthpace for name of transaction
+     * @param categoryWidth Widthpace for category of transaction
+     * @param amountWidth Widthpace for amount of transaction
+     */
     private void printHeader(int typeWidth, int nameWidth, int categoryWidth, int amountWidth) {
         System.out.printf("%s  | %-" + typeWidth + "s | %-" + nameWidth + "s | %-" + categoryWidth + "s | %-" + amountWidth + "s\n",
                 "#", "Type", "Name", "Category", "Amount");
     }
 
-    // Refactored printDashLine function with dynamic widths
+    /**
+     * Helper function to displayData, it prints the dashed lines
+     * @param typeWidth Widthpace for type of transaction
+     * @param nameWidth Widthpace for name of transaction
+     * @param categoryWidth Widthpace for name of transaction
+     * @param amountWidth Widthpace for amount of transaction
+     */
     private void printDashLine(int typeWidth, int nameWidth, int categoryWidth, int amountWidth) {
         int totalLength = 3 + 1 + typeWidth + 1 + 1 + nameWidth + 1 + 1 + categoryWidth + 1 + 1 + amountWidth + 1 + 3;
         System.out.println("-".repeat(totalLength));
     }
-
+    /**
+     * Helper function to displayData, it prints the data 
+     * @param typeWidth Widthpace for type of transaction
+     * @param nameWidth Widthpace for name of transaction
+     * @param categoryWidth Widthpace for name of transaction
+     * @param amountWidth Widthpace for amount of transaction
+     * @param data Transaction arraylist containing transactions
+     */
     private void printData(int typeWidth, int nameWidth, int categoryWidth, int amountWidth, LinkedList<Transactions> data)
     {
         FinanceManager fm = new FinanceManager();
@@ -174,10 +212,5 @@ public class FileHandler
         System.out.printf("%s    %-" + typeWidth + "s   %-" + nameWidth + "s   %s%,.2f\n"," "," ".repeat(typeWidth)," ".repeat(nameWidth), "Total Balance:$",totals[2]);
 
     }
-
-  
-
-    // Other methods...
-
 
 }

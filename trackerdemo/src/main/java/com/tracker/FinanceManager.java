@@ -15,21 +15,29 @@ public class FinanceManager implements Serializable
     Scanner input = new Scanner(System.in);
     TransactionSearchAndSort sorter;
 
-    //Prints Menu
+    /**
+    *Prints out the main menu selection 
+    
+    */
     public void menu()
     {
         System.out.println("-------Welcome to your Personal Finance Tracker (Choose one of the options)-------\n"
             + "1. Add Budget\n2. Add Expense\n3. View Summary\n4. Save\n5. Delete(Budget/Expense)\n6. Exit");
     }
 
-    //Adds Transaction
+    /**
+    *Adds transaction to Transactions array list
+     */
     public void addTransaction(Transactions t)
     {
         list.add(t);
         System.out.println(t.getType()+ ": "+ t.getName()+ " has been added to tracker.");
 
     }
-    //Deletes Transaction
+
+    /**
+     * Deletes Transaction from Transaction arraylist
+     */
     public void deleteTransaction()
     {
         LinkedList<Transactions> completeList = fh.loadData(FILEPATH);
@@ -40,7 +48,9 @@ public class FinanceManager implements Serializable
         fh.removeData(choice, FILEPATH);
     }
    
-    //Displays Summary of curent list
+    /**
+     * Prints formatted Tracsaction arraylist
+     */
     public void viewSummary()
     {
         int count = 1;
@@ -53,11 +63,21 @@ public class FinanceManager implements Serializable
             }
 
     }
-    //Saves file to JSON
+
+    /**
+     * Sends current Transactions arraylist to FileHandler function uploadData 
+     * to save data to JSON file
+     */
     public void save()
     {
         fh.uploadData(list,FILEPATH);
     }
+
+    /**
+     * Calculates numberical data
+     * @param list Transaction arraylist
+     * @return Double array containing data at different idex
+     */
 
     public double[] calculateMoneySummary(LinkedList <Transactions> list)
     {
@@ -84,7 +104,11 @@ public class FinanceManager implements Serializable
         
         return calculationsArayy;
     }
-    
+    /**
+     * Displays menu for summary for sorting and searching transactions, processes input 
+     * and calls appropirate TransactionSearchAnsSort class functions
+     * @param advanceChoice Inputed choice from user
+     */
 
     public void displayAdvanceOptions(String advanceChoice)
     {

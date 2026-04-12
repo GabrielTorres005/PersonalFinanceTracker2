@@ -24,9 +24,9 @@ public class Transactions
 
 
 
-    /*
-    Getters and Setters
-     */
+ /**
+  * Turns object into a formatted string version
+  */
     @Override
     public String toString() 
     {
@@ -34,6 +34,10 @@ public class Transactions
                 + category + "]";
     }
 
+    /**
+     * Attributes getter and setter methods
+     * 
+     */
     public double getAmount() {
         return amount;
     }
