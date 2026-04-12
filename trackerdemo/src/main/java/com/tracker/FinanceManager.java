@@ -74,7 +74,7 @@ public class FinanceManager implements Serializable
     }
 
     /**
-     * Calculates numberical data
+     * Calculates numberical data (Total Budget, Total Expense, Total Balance)
      * @param list Transaction arraylist
      * @return Double array containing data at different idex
      */
